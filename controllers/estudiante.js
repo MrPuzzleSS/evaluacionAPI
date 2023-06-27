@@ -25,12 +25,12 @@ const estudianteGet = async (req, res = response) => {
 
 
 const estudiantePost = async (req, res = response) => {
-  const {documento, nombre, nota1, nota2, nota3} = req.body;
+  const {documento, nombre, nota1, nota2, nota3, observacion} = req.body;
   let mensaje = '';
 
   try {
     const promedio = ((parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3)) / 3).toFixed(1)
-    const estudiante = new Estudiante({documento:documento, nombre:nombre, nota1:nota1, nota2:nota2, nota3:nota3, promedio:promedio});
+    const estudiante = new Estudiante({documento:documento, nombre:nombre, nota1:nota1, nota2:nota2, nota3:nota3, promedio:promedio, observacion:observacion});
 
     await estudiante.save();
 
@@ -63,13 +63,13 @@ const estudiantePost = async (req, res = response) => {
 };
 
 const estudiantePut = async (req, res = response) => {
-  const { documento, nombre, nota1, nota2, nota3 } = req.body;
+  const { documento, nombre, nota1, nota2, nota3, observacion } = req.body;
   let mensaje = '';
 
   try {
     const estudiante = await Estudiante.findOneAndUpdate(
       { documento: documento },
-      { nombre: nombre, nota1: nota1, nota2: nota2, nota3: nota3, promedio: ((parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3)) / 3).toFixed(1) }
+      { nombre: nombre, nota1: nota1, nota2: nota2, nota3: nota3, promedio: ((parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3)) / 3).toFixed(1), observacion:observacion }
     );
 
     if (!estudiante) {

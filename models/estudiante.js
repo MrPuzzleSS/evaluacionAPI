@@ -29,6 +29,10 @@ const EstudianteSchema = Schema ({
     },
     promedio:{
         type:Number
+    },
+    obersevacion:{
+        type:String,
+        required:[true, 'La observacion es requerida']
     }
 })
 
